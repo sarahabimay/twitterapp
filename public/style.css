@@ -1,17 +1,19 @@
 body {
 	background-color: #008B8B;
 	font-size: 20px;
-	font-color: #FFFFFF;
+	color: #FFFFFF;
 }
 
 #searchvalue {
+	height: 100px;
+	width: 200px;
 	float:left;
 	clear:both;
 }
 #search {
-	background-color: purple;
+	background-color: #4682B4;
 	font-size: 25px;
-	width: 100px;
+	width: 200px;
 	height: 40px;
 	float: left;
 	clear:both;
@@ -21,6 +23,10 @@ body {
 	font-style: Verdana;
 	float: left;
 	clear: both;
+}
+
+#results li {
+	color: #F5FFFA;
 }
 
 

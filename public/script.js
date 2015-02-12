@@ -6,11 +6,13 @@ $(document).ready( function (){
 	$('#search').click( function() {
 		var resultHTML;
 		console.log( './gettweets?query='+$('#searchvalue').val());
-		$.get('./gettweets?query='+$('#searchvalue').val())
+		$.get('./gettweets?query=' + $('#searchvalue').val(), function( data ) {
+			console.log( 'data: ' + data );
+		})
 		.done(function(data){
 			console.log( "In done callback. Data: " + data );
 			resultHTML = data.map( function( element, index ){
-				return '<p>' + element.text + '</p>'
+				return '<li>' + element.text + '</li>'
 			})
 			$('#results').html(resultHTML.join("") );
 		});
