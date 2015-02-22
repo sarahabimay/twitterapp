@@ -1,32 +1,35 @@
 var http = require( 'http' );
-// var server = require('http').createServer( serverHandler ).listen(3000);
+//server = http.createServer(myHandler),
+
+var server = require('http').createServer( serverHandler );
+var io = require('socket.io')(server);
 
 var fs = require('fs');
 var path = require( 'path' );
 var twitterClient =  require( './twitterClientio');
 var ecstatic = require( 'ecstatic')({root: __dirname + '/public'});
-
+var myPort = process.env.PORT || 3000;
 var filePath;
 
-var server = require('http').createServer(  function (req, res) {
+function serverHandler  (req, res) {
 	console.log( "CONNECTION RECEIVED");
-    // if only URL root path is received then load the 'homepage'
-    if( req.url === '/' ) {
-      filePath = path.join( __dirname , "index.html" );
-      fs.readFile( filePath, function( err, data) {
-            if (err) console.log(err);
-            res.writeHead(200, {'Content-Type': 'text/html'});
-            res.write(data);
-            res.end();
-      });
-    }
+    //if only URL root path is received then load the 'homepage'
+    // if( req.url === '/' ) {
+    //   filePath = path.join( __dirname , "./public/indexio.html" );
+    //   fs.readFile( filePath, function( err, data) {
+    //         if (err) console.log(err);
+    //         res.writeHead(200, {'Content-Type': 'text/html'});
+    //         res.write(data);
+    //         res.end();
+    //   });
+    // }
     // if request is for obtaining tweets:
    // else if ( req.url.match( /gettweets/ ) ) {
 
     // otherwise look for file in ./public directory and read from there useing ecstatic
-    else {
+    // else {
       ecstatic( req, res ) ;
-    };
+    // };
 
     io.on('connection', function (socket) {
     	console.log('client connected via socket');
@@ -39,9 +42,10 @@ var server = require('http').createServer(  function (req, res) {
       	});
 	});
 
-}).listen(3000);
+};
 
-var io = require('socket.io')(server);
+server.listen(myPort);
+
 
 module.exports = {
 	start: function() {
