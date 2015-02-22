@@ -1,4 +1,4 @@
-var server = require( './myServer' );
+var server = require( './myServerio' );
 
 server.start();
 
